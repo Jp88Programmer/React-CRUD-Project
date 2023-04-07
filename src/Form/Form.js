@@ -279,7 +279,7 @@ const FirstName = (props) => {
         <p className=" font-bold m-4 text-red-600">* Fill all are mandatory</p>
         <div className="flex justify-center">
           <button
-            className="mb-6 bg-sky-950 border border-gray-300 text-white text-base rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-40 p-2.5 disabled:cursor-not-allowed"
+            className="mb-6 bg-sky-950 border border-gray-300 text-white font-bold text-base rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-40 p-2.5 disabled:cursor-not-allowed"
             disabled={!validForm}
           >
             Submit

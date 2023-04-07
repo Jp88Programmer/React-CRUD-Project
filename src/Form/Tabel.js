@@ -17,7 +17,7 @@ const Tabel = (props) => {
 
   return (
     <div className=" overflow-auto rounded-sm m-7">
-      <table className="bg-slate-500 text-black w-full border-2 border-black mb-10 text-center">
+      <table className="bg-slate-400 text-black w-full border-2 border-black mb-10 text-center">
         <tbody>
           <tr className="font-bold">
             <td className="p-3 border-2 border-black">Name</td>
