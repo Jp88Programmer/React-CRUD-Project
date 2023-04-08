@@ -12,13 +12,9 @@ function App() {
 
   const updateDataHandler = (updateData) => {
     console.log("update data : ",updateData)
-    // setFormData(updateData)
     setUpdateFormData(updateData);
   };
 
-  function editData(){
-
-  }
   function data(oldData) {
     setFormData([
       ...formData,

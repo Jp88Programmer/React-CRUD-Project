@@ -266,26 +266,26 @@ const FirstName = (props) => {
           </label>
           <input
             className="block border border-black rounded-md p-1.5 mt-1 w-full"
-            type="number"
+            type="tel"
             id="phonenumber"
             placeholder="Enter Like 123123123..."
             onBlur={PhoneNumberBlurChanger}
             onChange={PhoneNumberChanger}
             value={phoneNumber}
           />
-          {/* {inputPhoneNumberError && (
+          {inputPhoneNumberError && (
             <p className="text-red-600">
-              {birthPlace.trim().length === 0
+              {phoneNumber.trim().length === 0
                 ? "Phonenumber is required"
                 : "Phone Number at least 10 digit."}
               </p>
-          )} */}
+          )}
         </div>
         <div className="font-bold m-4">
           <label className=" mr-2">Profile picture :</label>
           <input type="file" accept=".jpg,.jpeg,.png" />
         </div>
-        <p className=" font-bold m-4 text-red-600">* Fill all are mandatory</p>
+        <p className=" font-bold m-4 text-red-600">* All the above fields are mandatory</p>
         <div className="flex justify-center">
           <button
             className="mb-6 bg-sky-950 border border-gray-300 text-white font-bold text-base rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-40 p-2.5 disabled:cursor-not-allowed"
