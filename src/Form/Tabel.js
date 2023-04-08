@@ -1,17 +1,15 @@
 import React from "react";
 
 const Tabel = (props) => {
-
+  // console.
   function deleteData(id) {
     let total = props.inputData.filter((items) => items.id !== id);
     props.onDeleteData(total);
   }
 
   function updateData(i) {
-
- let tempData = props.inputData[i]
- console.log('temp', tempData);
-
+    let tempData = props?.inputData[i];
+    console.log("temp", tempData);
     props.onUpdateData(tempData);
   }
 
@@ -28,7 +26,8 @@ const Tabel = (props) => {
             <td className="border-2 border-black">Update</td>
             <td className="border-2 border-black">Delete</td>
           </tr>
-          {props.inputData.map((items) => {
+          {console.log("this is the props", props)}
+          {props.inputData.map((items,index) => {
             return (
               <tr className=" font-bold text-black" key={items.id}>
                 <td className="border-2 border-black">
@@ -47,7 +46,7 @@ const Tabel = (props) => {
                 <td className="border-2 border-black">
                   <button
                     className=" bg-blue-500 text-white px-2 py-1 rounded-md m-2"
-                    onClick={() => updateData(items.i)}
+                    onClick={() => updateData(index)}
                   >
                     Update
                   </button>
