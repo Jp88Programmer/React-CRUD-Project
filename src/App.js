@@ -4,15 +4,21 @@ import Tabel from "./Form/Tabel";
 
 function App() {
   const [formData, setFormData] = useState([]);
+  const [updateFormData,setUpdateFormData] = useState(null);
 
   const deleteDataHandler = (deletedData) => {
     setFormData(deletedData);
   };
 
   const updateDataHandler = (updateData) => {
-    setFormData(updateData)
+    console.log("update data : ",updateData)
+    // setFormData(updateData)
+    setUpdateFormData(updateData);
   };
 
+  function editData(){
+
+  }
   function data(oldData) {
     setFormData([
       ...formData,
@@ -31,8 +37,12 @@ function App() {
 
   return (
     <>
-      <Form onInputData={data} />
-      <Tabel inputData={formData} onDeleteData={deleteDataHandler} onUpdateData={updateDataHandler}/>
+      <Form onInputData={data} updateFormData={updateFormData}/>
+      <Tabel
+        inputData={formData}
+        onDeleteData={deleteDataHandler}
+        onUpdateData={updateDataHandler}
+      />
     </>
   );
 }

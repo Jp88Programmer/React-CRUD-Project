@@ -2,7 +2,7 @@ import InputData from "../UserInput/InputData";
 
 const FirstName = (props) => {
 
-  const {
+  let {
     value: enName,
     valid: validName,
     error: inputError,
@@ -11,7 +11,7 @@ const FirstName = (props) => {
     reset: resetNameInput,
   } = InputData((value) => value.trim().length >= 2);
 
-  const {
+  let {
     value: lastName,
     valid: validLastName,
     error: inputLastNameError,
@@ -20,7 +20,7 @@ const FirstName = (props) => {
     reset: resetLastNameInput,
   } = InputData((value) => value.trim().length >= 2);
 
-  const {
+  let {
     value: birthdate,
     valid: validBirthDate,
     error: inputBirthDateError,
@@ -39,7 +39,7 @@ const FirstName = (props) => {
     return false;
   });
 
-  const {
+  let {
     value: currentaddress,
     valid: validCurrentAddress,
     error: inputCurrentAddressError,
@@ -48,7 +48,7 @@ const FirstName = (props) => {
     reset: resetCurrentAddressInput,
   } = InputData((value) => value.trim().length >= 5);
 
-  const {
+  let {
     value: permenentaddress,
     valid: validPermenentAddress,
     error: inputPermenentAddressError,
@@ -57,7 +57,7 @@ const FirstName = (props) => {
     reset: resetPermenentAddressInput,
   } = InputData((value) => value.trim().length >= 5);
 
-  const {
+  let {
     value: birthPlace,
     valid: validBirthPlace,
     error: inputBirthPlaceError,
@@ -66,7 +66,7 @@ const FirstName = (props) => {
     reset: resetBirthPlaceInput,
   } = InputData((value) => value.trim().length >= 2);
 
-  const {
+  let {
     value: phoneNumber,
     valid: validPhoneNumber,
     error: inputPhoneNumberError,
@@ -89,6 +89,15 @@ const FirstName = (props) => {
     validForm = true;
   }
 
+  if (props.updateFormData) {
+    enName = props.updateFormData?.firstname;
+    lastName = props.updateFormData?.lastname;
+    birthdate = props.updateFormData?.birthdate;
+    currentaddress = props.updateFormData?.currentaddress;
+    permenentaddress = props.updateFormData?.permenentaddress;
+    birthPlace = props.updateFormData?.birthplace;
+    phoneNumber = props.updateFormData?.phonenumber;
+  }
   const formSubmit = (event) => {
     event.preventDefault();
 
@@ -101,18 +110,20 @@ const FirstName = (props) => {
       Birthplace: birthPlace,
       Phonenumber: phoneNumber,
     };
-    props.onInputData(allData);
-    if (
-      !validName &&
-      !validLastName &&
-      !validBirthDate &&
-      !validCurrentAddress &&
-      !validPermenentAddress &&
-      !validBirthPlace &&
-      !validPhoneNumber
-    ) {
-      return;
-    }
+    props?.onInputData(allData);
+    // console.log(props?.onInputData)
+
+      if (
+        !validName &&
+        !validLastName &&
+        !validBirthDate &&
+        !validCurrentAddress &&
+        !validPermenentAddress &&
+        !validBirthPlace &&
+        !validPhoneNumber
+      ) {
+        return;
+      }
     resetNameInput();
     resetLastNameInput();
     resetBirthDateInput();
@@ -255,22 +266,20 @@ const FirstName = (props) => {
           </label>
           <input
             className="block border border-black rounded-md p-1.5 mt-1 w-full"
-            type="tel"
+            type="number"
             id="phonenumber"
-            placeholder="Enter Like '123123123'..."
+            placeholder="Enter Like 123123123..."
             onBlur={PhoneNumberBlurChanger}
             onChange={PhoneNumberChanger}
             value={phoneNumber}
-            pattern="1234567890"
-            required
           />
-          {inputPhoneNumberError && (
+          {/* {inputPhoneNumberError && (
             <p className="text-red-600">
               {birthPlace.trim().length === 0
                 ? "Phonenumber is required"
                 : "Phone Number at least 10 digit."}
               </p>
-          )}
+          )} */}
         </div>
         <div className="font-bold m-4">
           <label className=" mr-2">Profile picture :</label>
