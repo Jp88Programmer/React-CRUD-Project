@@ -16,18 +16,20 @@ const useInput = (validateValue) => {
   };
 
   const reset = () => {
-    setEnValue('');
+    setEnValue("");
     setTouch(false);
   };
 
-  return {
-    value: enValue,
-    valid: valueValid,
+  return [
+    enValue,
+    setEnValue,
+    setTouch,
+    valueValid,
     error,
     inputValueHandler,
     inputBlurHandler,
-    reset
-  };
+    reset,
+  ];
 };
 
 export default useInput;

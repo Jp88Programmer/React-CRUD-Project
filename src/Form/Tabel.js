@@ -1,7 +1,6 @@
 import React from "react";
 
 const Tabel = (props) => {
-  // console.
   function deleteData(id) {
     let total = props.inputData.filter((items) => items.id !== id);
     props.onDeleteData(total);
@@ -27,7 +26,7 @@ const Tabel = (props) => {
             <td className="border-2 border-black">Delete</td>
           </tr>
           {console.log("this is the props", props)}
-          {props.inputData.map((items,index) => {
+          {props?.inputData.map((items,index) => {
             return (
               <tr className=" font-bold text-black" key={items.id}>
                 <td className="border-2 border-black">

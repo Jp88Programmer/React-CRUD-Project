@@ -1,33 +1,41 @@
+import { useEffect, useState } from "react";
 import InputData from "../UserInput/InputData";
 
 const FirstName = (props) => {
+  
+  const [id,setId] = useState(0);
+  let [
+    enName,
+    setenName,
+    setenTouch,
+    validName,
+    inputError,
+    nameChanger,
+    nameBlurChanger,
+    resetNameInput,
+  ] = InputData((value) => value.trim().length >= 2);
 
-  let {
-    value: enName,
-    valid: validName,
-    error: inputError,
-    inputValueHandler: nameChanger,
-    inputBlurHandler: nameBlurChanger,
-    reset: resetNameInput,
-  } = InputData((value) => value.trim().length >= 2);
+  let [
+    lastName,
+    setlastName,
+    setlastTouch,
+    validLastName,
+    inputLastNameError,
+    LastNameChanger,
+    LastNameBlurChanger,
+    resetLastNameInput,
+  ] = InputData((value) => value.trim().length >= 2);
 
-  let {
-    value: lastName,
-    valid: validLastName,
-    error: inputLastNameError,
-    inputValueHandler: LastNameChanger,
-    inputBlurHandler: LastNameBlurChanger,
-    reset: resetLastNameInput,
-  } = InputData((value) => value.trim().length >= 2);
-
-  let {
-    value: birthdate,
-    valid: validBirthDate,
-    error: inputBirthDateError,
-    inputValueHandler: BirthDateChanger,
-    inputBlurHandler: BirthDateBlurChanger,
-    reset: resetBirthDateInput,
-  } = InputData((value) => {
+  let [
+    birthdate,
+    setBirthdate,
+    setBirthTouch,
+    validBirthDate,
+    inputBirthDateError,
+    BirthDateChanger,
+    BirthDateBlurChanger,
+    resetBirthDateInput,
+  ] = InputData((value) => {
     const trimmedValue = value.trim();
     if (trimmedValue) {
       const inputDate = new Date(trimmedValue);
@@ -39,41 +47,49 @@ const FirstName = (props) => {
     return false;
   });
 
-  let {
-    value: currentaddress,
-    valid: validCurrentAddress,
-    error: inputCurrentAddressError,
-    inputValueHandler: CurrentAddressChanger,
-    inputBlurHandler: CurrentAddressBlurChanger,
-    reset: resetCurrentAddressInput,
-  } = InputData((value) => value.trim().length >= 5);
+  let [
+    currentaddress,
+    setCurrentaddress,
+    setCurrentTouch,
+    validCurrentAddress,
+    inputCurrentAddressError,
+    CurrentAddressChanger,
+    CurrentAddressBlurChanger,
+    resetCurrentAddressInput,
+  ] = InputData((value) => value.trim().length >= 5);
 
-  let {
-    value: permenentaddress,
-    valid: validPermenentAddress,
-    error: inputPermenentAddressError,
-    inputValueHandler: PermenentAddressChanger,
-    inputBlurHandler: PermenentAddressBlurChanger,
-    reset: resetPermenentAddressInput,
-  } = InputData((value) => value.trim().length >= 5);
+  let [
+    permenentaddress,
+    setPermentaddress,
+    setPermentTouch,
+    validPermenentAddress,
+    inputPermenentAddressError,
+    PermenentAddressChanger,
+    PermenentAddressBlurChanger,
+    resetPermenentAddressInput,
+  ] = InputData((value) => value.trim().length >= 5);
 
-  let {
-    value: birthPlace,
-    valid: validBirthPlace,
-    error: inputBirthPlaceError,
-    inputValueHandler: BirthPlaceChanger,
-    inputBlurHandler: BirthPlaceBlurChanger,
-    reset: resetBirthPlaceInput,
-  } = InputData((value) => value.trim().length >= 2);
+  let [
+    birthPlace,
+    setBirthPlace,
+    setBirthPlaceTouch,
+    validBirthPlace,
+    inputBirthPlaceError,
+    BirthPlaceChanger,
+    BirthPlaceBlurChanger,
+    resetBirthPlaceInput,
+  ] = InputData((value) => value.trim().length >= 2);
 
-  let {
-    value: phoneNumber,
-    valid: validPhoneNumber,
-    error: inputPhoneNumberError,
-    inputValueHandler: PhoneNumberChanger,
-    inputBlurHandler: PhoneNumberBlurChanger,
-    reset: resetPhoneNumberInput,
-  } = InputData((value) => value.trim().length === 10);
+  let [
+    phoneNumber,
+    setPhoneNumber,
+    setPhoneTouch,
+    validPhoneNumber,
+    inputPhoneNumberError,
+    PhoneNumberChanger,
+    PhoneNumberBlurChanger,
+    resetPhoneNumberInput,
+  ] = InputData((value) => value.trim().length === 10);
 
   let validForm = false;
 
@@ -89,19 +105,32 @@ const FirstName = (props) => {
     validForm = true;
   }
 
-  if (props.updateFormData) {
-    enName = props.updateFormData?.firstname;
-    lastName = props.updateFormData?.lastname;
-    birthdate = props.updateFormData?.birthdate;
-    currentaddress = props.updateFormData?.currentaddress;
-    permenentaddress = props.updateFormData?.permenentaddress;
-    birthPlace = props.updateFormData?.birthplace;
-    phoneNumber = props.updateFormData?.phonenumber;
-  }
+  useEffect(() => {
+    if (props.updateFormData) {
+      setId(props.updateFormData?.id);
+      setenName(props.updateFormData?.firstname);
+      setenTouch(true);
+      setlastName(props.updateFormData?.lastname);
+      setlastTouch(true);
+      setBirthdate(props.updateFormData?.birthdate);
+      setBirthTouch(true);
+      setCurrentaddress(props.updateFormData?.currentaddress);
+      setCurrentTouch(true);
+      setPermentaddress(props.updateFormData?.permenentaddress);
+      setPermentTouch(true);
+      setBirthPlace(props.updateFormData?.birthplace);
+      setBirthPlaceTouch(true);
+      setPhoneNumber(props.updateFormData?.phonenumber);
+      setPhoneTouch(true);
+      props.setUpdateFormData(null);
+    }
+  }, [props.updateFormData]);
+
   const formSubmit = (event) => {
     event.preventDefault();
 
     const allData = {
+      id:id,
       Firstname: enName,
       Lastname: lastName,
       Birthdate: birthdate,
@@ -111,19 +140,18 @@ const FirstName = (props) => {
       Phonenumber: phoneNumber,
     };
     props?.onInputData(allData);
-    // console.log(props?.onInputData)
 
-      if (
-        !validName &&
-        !validLastName &&
-        !validBirthDate &&
-        !validCurrentAddress &&
-        !validPermenentAddress &&
-        !validBirthPlace &&
-        !validPhoneNumber
-      ) {
-        return;
-      }
+    if (
+      !validName &&
+      !validLastName &&
+      !validBirthDate &&
+      !validCurrentAddress &&
+      !validPermenentAddress &&
+      !validBirthPlace &&
+      !validPhoneNumber
+    ) {
+      return;
+    }
     resetNameInput();
     resetLastNameInput();
     resetBirthDateInput();
@@ -141,7 +169,7 @@ const FirstName = (props) => {
       >
         <div className="font-bold m-4">
           <label className=" mr-2" htmlFor="name">
-            First Name <span class="text-red-500">*</span> 
+            First Name <span class="text-red-500">*</span>
           </label>
           <input
             className="block border border-black rounded-md p-1.5 mt-1 w-full"
@@ -154,7 +182,7 @@ const FirstName = (props) => {
           />
           {inputError && (
             <p className="text-red-600">
-            {enName.trim().length === 0
+              {enName.trim().length === 0
                 ? "First Name is required"
                 : "First Name is too short! Please enter at least 2 characters"}
             </p>
@@ -162,7 +190,7 @@ const FirstName = (props) => {
         </div>
         <div className="font-bold m-4">
           <label className=" mr-2" htmlFor="name">
-            Last Name <span class="text-red-500">*</span> 
+            Last Name <span class="text-red-500">*</span>
           </label>
           <input
             className="block border border-black rounded-md p-1.5 mt-1 w-full"
@@ -175,7 +203,7 @@ const FirstName = (props) => {
           />
           {inputLastNameError && (
             <p className="text-red-600">
-            {lastName.trim().length === 0
+              {lastName.trim().length === 0
                 ? "Last Name is required"
                 : "Last Name is too short! Please enter at least 2 characters"}
             </p>
@@ -183,7 +211,7 @@ const FirstName = (props) => {
         </div>
         <div className="font-bold m-4">
           <label className=" mr-2" htmlFor="birthdate">
-            Birth Date <span class="text-red-500">*</span> 
+            Birth Date <span class="text-red-500">*</span>
           </label>
           <input
             className="block border border-black rounded-md p-1.5 mt-1 w-full "
@@ -199,7 +227,7 @@ const FirstName = (props) => {
         </div>
         <div className="font-bold m-4">
           <label className=" mr-2" htmlFor="currentAddress">
-            Current Address <span class="text-red-500">*</span> 
+            Current Address <span class="text-red-500">*</span>
           </label>
           <textarea
             className="block border border-black rounded-md p-1.5 mt-1 w-full"
@@ -233,7 +261,7 @@ const FirstName = (props) => {
           />
           {inputPermenentAddressError && (
             <p className="text-red-600">
-            {permenentaddress.trim().length === 0
+              {permenentaddress.trim().length === 0
                 ? "Permenent Address is required"
                 : "Permenent Address is too short! Please enter at least 5 characters."}
             </p>
@@ -241,7 +269,7 @@ const FirstName = (props) => {
         </div>
         <div className="font-bold m-4">
           <label className=" mr-2" htmlFor="placeofbirth">
-            Place of Birth <span class="text-red-500">*</span> 
+            Place of Birth <span class="text-red-500">*</span>
           </label>
           <input
             className="block border border-black rounded-md p-1.5 mt-1 w-full"
@@ -254,7 +282,7 @@ const FirstName = (props) => {
           />
           {inputBirthPlaceError && (
             <p className="text-red-600">
-             {birthPlace.trim().length === 0
+              {birthPlace.trim().length === 0
                 ? "Birthplace is required"
                 : "Birthplace is too short! Please enter at least 2 characters."}
             </p>
@@ -262,7 +290,7 @@ const FirstName = (props) => {
         </div>
         <div className="font-bold m-4">
           <label className=" mr-2" htmlFor="phonenumber">
-            Phone Number <span class="text-red-500">*</span> 
+            Phone Number <span class="text-red-500">*</span>
           </label>
           <input
             className="block border border-black rounded-md p-1.5 mt-1 w-full"
