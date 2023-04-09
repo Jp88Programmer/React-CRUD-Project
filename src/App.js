@@ -11,7 +11,6 @@ function App() {
   };
 
   const updateDataHandler = (updateData) => {
-    console.log("update data : ", updateData);
     setUpdateFormData(updateData);
   };
 

@@ -34,10 +34,10 @@ const Tabel = (props) => {
                 </td>
                 <td className="border-2 border-black">{items.birthdate}</td>
                 <td className="border-2 border-black">
-                  <span className=" text-black">Current :</span>{" "}
+                  <span className=" text-black">Current :</span>
                   {items.currentaddress}
                   <br />
-                  <span className=" text-black">Permenent :</span>{" "}
+                  <span className=" text-black">Permenent :</span>
                   {items.permenentaddress}
                 </td>
                 <td className="border-2 border-black">{items.birthplace}</td>
